@@ -114,7 +114,8 @@ VersionID := "1.0.0"
 ;initial load warnings
 if (A_ScreenDPI != 96)
 	MsgBox "
-	(
+	v := ((base_movespeed + (coconut_haste ? 10 : 0) + (bear ? 4 : 0)) * (1 + (gifted_hasty ? 0.15 : 0)) * (hasty_guard ? 1.1 : 1) * (1 + max(0, haste-hasteCap)*0.1) * (haste_plus ? 2 : 1) * (oil ? 1.2 : 1) * (smoothie ? 1.25 : 1))
+
 	Your Display Scale seems to be a value other than 100%. This means the macro will NOT work correctly!
 
 	To change this:
@@ -15073,8 +15074,8 @@ nm_createWalk(movement, name:="", vars:="") ; this function generates the 'walk'
 	movespeed := ' MoveSpeedNum '
 	hasty_guard := (Mod(movespeed*10, 11) = 0) ? 1 : 0
 	base_movespeed := movespeed / (hasty_guard ? 1.1 : 1)
-	gifted_hasty := ((Mod(base_movespeed*10, 12) = 0) && base_movespeed != 18 && base_movespeed != 24 && base_movespeed != 30) ? 1 : 0
-	base_movespeed /= (gifted_hasty ? 1.2 : 1)
+gifted_hasty := ((Mod(base_movespeed*10, 11.5) = 0) && base_movespeed != 23) ? 1 : 0
+base_movespeed := Floor(base_movespeed/(gifted_hasty ? 1.15 : 1))
 	'
 	) :
 	(
